@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1">
+    <title>Clientes</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <!-- Tema opcional -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+    <!-- JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="js/pagination.js"></script>
+</head>
+<body>
+<h1>Listado de Clientes mediante Servicio REST</h1>
+<div class="table-responsive">
+  <table class="table table-hover table-bordered">
+     <thead>
+     <tr>
+         <th>ID</th>
+         <th>Nombre</th>
+         <th>Apellido</th>
+         <th>Email</th>
+     </tr>
+     </thead>
+ </table>
+</div>
+ <script>
+     $(function () {
+         //Al cargar la página recuperamos el listado de clientes
+         $.getJSON("/clientes",
+             function (data) {
+                 //Por cada uno creamos una fila de HTML
+                 $.each(data, function (key, val) {
+                     var fila = "<tr><td>" + val.DNI + "</td><td><a href='#' onclick='cargarDetalle(event,\"" + val.DNI + "\");'>Ver Detalle</a></td></tr>";
+                     //Añadimos la fila a la tabla
+                     $(fila).appendTo("#tablaClientes");
+                 });
+             });
+     })
+ </script>
+ <div class="col-md-12 text-center">
+    <ul class="pagination pagination-lg pager" id="developer_page"></ul>
+ </div>
+</body>
+</html>
